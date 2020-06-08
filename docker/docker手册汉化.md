@@ -1,12 +1,16 @@
-Docker overview
+翻译基于 Docker v19.03
 
-Docker is an open platform for developing, shipping 运送, and running applications. 
+# Get started
 
-Docker enables you to separate分开 your applications from your infrastructure 基础设施 so you can deliver software quickly. 
+## Docker overview
+
+Docker is an open platform for developing, shipping , and running applications. 
+
+Docker enables you to separate your applications from your infrastructure  so you can deliver software quickly. 
 
 With Docker, you can manage your infrastructure in the same ways you manage your applications. 
 
-By taking advantage 优势 of Docker’s methodologies 方法论 for shipping, testing, and deploying部署 code quickly, you can significantly 显著的 reduce the delay between writing code and running it in production.
+By taking advantage  of Docker’s methodologies  for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
 
 
 
@@ -32,41 +36,52 @@ Docker 可以让你的程序和基础环境分开，这样你可以快速的交�
 
 
 
-------
-
 ## The Docker platform
 
-Docker provides the ability to package and run an application in a loosely宽松 isolated environment called a container. 
+Docker provides the ability to package and run an application in a loosely isolated environment called a container. 
 
-Docker通过提供宽松和隔离的容器环境，去打包和执行应用程序。
+The isolation and security allow you to run many containers simultaneously on a given host. 
 
-The isolation and security allow you to run many containers simultaneously同时地 on a given host. 
+Containers are lightweight because they don’t need the extra load of a hypervisor, but run directly within the host machine’s kernel. 
 
-这个隔离性和安全性允许开发者同时在同一主机上执行很多的容器互不干扰。
-
-Containers are lightweight because they don’t need the extra load of a hypervisor管理程序, but run directly within the host machine’s kernel. 
-
-之所以容器轻量级是因为不需要加载笨重的管理程序，而是直接运行在主机的内核上。
-
-This means you can run more containers on a given hardware combination 结合和组合 than if you were using virtual machines. 
-
-这意味着在相同的物理机器上可以执行的容器数量要比虚拟机多得多。
+This means you can run more containers on a given hardware combination  than if you were using virtual machines. 
 
 You can even run Docker containers within host machines that are actually virtual machines!
-
-你甚至可以把docker运行在主机的虚拟机中。
 
 Docker provides tooling and a platform to manage the lifecycle of your containers:
 
 - Develop your application and its supporting components using containers.
-- The container becomes the unit 单元 for distributing 分散，发布 and testing your application.
-- When you’re ready, deploy your application into your production environment, as a container or an orchestrated精心安排 service. This works the same whether your production environment is a local data center, a cloud provider, or a hybrid混合的，混合物 of the two.
+- The container becomes the unit for distributing and testing your application.
+- When you’re ready, deploy your application into your production environment, as a container or an orchestrated service. This works the same whether your production environment is a local data center, a cloud provider, or a hybrid of the two.
+
+Docker通过提供宽松和隔离的容器环境，去打包和执行应用程序。
+
+这个隔离性和安全性允许开发者同时在同一主机上执行很多的容器互不干扰。
+
+之所以容器轻量级是因为不需要加载笨重的管理程序，而是直接运行在主机的内核上。
+
+这意味着在相同的物理机器上可以执行的容器数量要比虚拟机多得多。
+
+你甚至可以把docker运行在主机的虚拟机中。
 
 docker提供工具和平台去管理容器的生命周期
 
 - 使用容器部署你的应用程序和应用程序所需要的组件。
 - 容器成为你发布和测试你的应用程序的最小单元。
 - 当你准备使用容器或者编排服务去部署你的应用程序时，在本地的数据中心，或者是云服务，亦或者是两者都有的环境，其操作都是相同的，很容易部署的意思。
+
+
+
+1. loosely 宽松
+2. simultaneously 同时地
+3. hypervisor 管理程序
+4. combination 结合和组合
+5. unit 单元
+6. distributing 分散，发布
+7. orchestrated精心安排
+8. hybrid混合的，混合物
+
+
 
 ## Docker Engine
 
@@ -84,7 +99,8 @@ Docker引擎是一个一个C-S应用程序，主要包括以下部分
 
 ![image-20200606224302797](/Users/linbin/Library/Application Support/typora-user-images/image-20200606224302797.png)
 
-从图上可以看到，docker比较重要的管理
+```
+从图上可以看到，docker比较重要的组件
 
 1. image 镜像
 2. container 容器
@@ -96,13 +112,59 @@ docker的构成
 1. Server docker daemon 核心守护进程
 2. REST API 用户与守护进程沟通
 3. Client docker CLO 提供给我们开发者使用docker，是使用了REST API
+```
 
 
 
-The CLI uses the Docker REST API to control or interact 相互作用 with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI.
-
-命令行接口可以通过脚本或者命令行去控制docker守护进程，或者沟通。其他的docker应用使用CLI命令行或者底层API。
+The CLI uses the Docker REST API to control or interact  with the Docker daemon through scripting or direct CLI commands. Many other Docker applications use the underlying API and CLI.
 
 The daemon creates and manages Docker *objects*, such as images, containers, networks, and volumes.
 
-守护线程创建和管理docker对象，例如镜像，容器，网络，数据卷
+
+
+1. interact 相互作用
+2. underlying adj. 潜在的；根本的；在下面的；优先的
+
+
+
+命令行接口可以通过脚本或者命令行去控制docker守护进程，或者沟通。其他的docker应用使用CLI命令行或者底层API。
+
+守护线程创建和管理docker对象，例如镜像，容器，网络，数据卷（所以这些东西叫做docker object）
+
+
+
+## What can I use Docker for?
+
+快速，一致的交付你的应用程序
+
+**Fast, consistent delivery of your applications**
+
+快速，一致的交付你的应用程序
+
+Docker streamlines （n 流线 v 流线型，简化） the development lifecycle by allowing developers to work in standardized environments using local containers which provide your applications and services. 
+
+
+
+Docker通过允许开发者使用本地容器让应用程序和服务运行在在相同标准的环境中从而简化了开发的生命周期。
+
+
+
+Containers are great for continuous integration 集成 and continuous delivery 派送，交付 (CI/CD) workflows . 工作流
+
+
+
+容器非常适合用于持续集成和持续交付的工作流
+
+
+
+Consider the following example scenario 方案:
+
+- Your developers write code locally and share their work with their colleagues 同事，同行  using Docker containers.
+- They use Docker to push their applications into a test environment and execute automated and manual tests.
+- When developers find bugs, they can fix them in the development environment and redeploy them to the test environment for testing and validation.
+- When testing is complete, getting the fix to the customer is as simple as pushing the updated image to the production environment.
+
+可以参考以下方案
+
+- 你的开发者在本地编写代码然后通过容器分享给同事
+- 他们使用docker
