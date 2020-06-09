@@ -160,11 +160,43 @@ Containers are great for continuous integration 集成 and continuous delivery �
 Consider the following example scenario 方案:
 
 - Your developers write code locally and share their work with their colleagues 同事，同行  using Docker containers.
-- They use Docker to push their applications into a test environment and execute automated and manual tests.
-- When developers find bugs, they can fix them in the development environment and redeploy them to the test environment for testing and validation.
+- They use Docker to push their applications into a test environment and execute automated and manual (adj体力的手动的，n说明书) tests.
+- When developers find bugs, they can fix them in the development environment and redeploy them to the test environment for testing and validation 确认.
 - When testing is complete, getting the fix to the customer is as simple as pushing the updated image to the production environment.
 
 可以参考以下方案
 
 - 你的开发者在本地编写代码然后通过容器分享给同事
-- 他们使用docker
+- 他们使用docker推送他们的应用程序到测试环境，然后运行自动化和人工测试
+- 当开发者发现bug的时候，确认并在开发环境解决他们，然后重新部署到测试环境
+- 当一切搞定的时候可以很方便的提交镜像，然后部署到生产环境
+
+这里面涉及三个环境，并且都是相同的，docker为你屏蔽了环境问题，轻松交付
+
+1. development environment 开发环境
+2. test environment 测试环境
+3. production environment 开发环境
+
+
+
+**Responsive deployment and scaling**
+
+响应式开发和扩展
+
+Docker’s container-based platform allows for highly portable（adj 手提的，便携的 n 手提打印机） workloads. 
+
+docker 容器的执行平台可以被高度移植
+
+Docker containers can run on a developer’s local laptop, on physical or virtual machines in a data center, on cloud providers, or in a mixture 混合物 of environments.
+
+docker容器可以运行在开发者的本地手提，或者在物理机，虚拟机上，云服务器上或者混合环境中。
+
+Docker’s portability and lightweight nature also make it easy to dynamically manage workloads, scaling up 放大 or tearing down 减少 applications and services as business needs dictate 命令, in near real time. 几乎是实时的
+
+Docker的可移植性和轻量级的特性让它可以在执行环境中动态管理。
+
+在真实环境下根据不同的场合增加或者减少对应应用程序和服务的数量。
+
+scaling up 按比例放大
+
+tearing down 减少
