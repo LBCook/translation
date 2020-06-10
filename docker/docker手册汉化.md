@@ -202,3 +202,38 @@ Docker的可移植性和轻量级的特性让它可以在执行环境中动态�
 scaling up 按比例放大
 
 tearing down 减少
+
+
+
+**Hypervisor**，又称**虚拟机监视器**（英语：virtual machine monitor，缩写为 VMM），是用来建立与执行[虚拟机器](https://baike.baidu.com/item/虚拟机器)的软件、固件或硬件。
+
+
+
+**Running more workloads 负载 on the same hardware**
+
+相同的硬件下可以运行更多的负载
+
+Docker is lightweight and fast. 
+
+Docker 轻量级且快
+
+It provides a viable 可行的, cost-effective 费用+效率=划算 alternative 二选一  to hypervisor-based virtual machines, so you can use more of your compute capacity to achieve your business goals. 
+
+对比虚拟机容器技术提供了更加划算和可行的方案，可以使你在为了实现业务目标中使用到更多的计算机能力。
+
+Docker is perfect for high density 密度 environments and for small and medium deployments where you need to do more with fewer resources.
+
+Docker非常适合高密度的环境 和 哪些资源有限的小或者中形开发者，节约很多资源的意思。
+
+
+
+## Docker architecture 架构
+
+Docker uses a client-server architecture. The Docker *client* talks to the Docker *daemon*, which does the heavy lifting 举起，承载 of building, running, and distributing your Docker containers. The Docker client and daemon *can* run on the same system, or you can connect a Docker client to a remote Docker daemon. The Docker client and daemon communicate using a REST API, over UNIX sockets or a network interface.
+
+Docker 使用CS架构。Docker客户端与Docker守护进程交流，Docker守护进程主要处理镜像的构建，容器的运行和销毁。Docker客户端和Docker守护进程可以运行在相同的系统上，或者也可以通过远程连接。他们之间的交流建立在UNIX socket 或者 网络接口 上，使用的是REST API（一种规范）
+
+
+
+<img src="/Users/linbin/Library/Application Support/typora-user-images/image-20200610220350611.png" alt="image-20200610220350611" style="zoom:40%;" />
+
