@@ -237,3 +237,80 @@ Docker 使用CS架构。Docker客户端与Docker守护进程交流，Docker守�
 
 <img src="/Users/linbin/Library/Application Support/typora-user-images/image-20200610220350611.png" alt="image-20200610220350611" style="zoom:40%;" />
 
+### The Docker daemon
+
+The Docker daemon (`dockerd`) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.
+
+Docker 守护进程监听并反馈API接口，管理docker对象例如：镜像，容器，网络，数据卷。守护进程还可以与其他守护进程沟通形成一个容器集群。
+
+### The Docker client 客户端
+
+The Docker client (`docker`) is the primary way 主要的方式 that many Docker users interact with Docker. When you use commands such as `docker run`, the client sends these commands to `dockerd`, which carries  them out. The `docker` command uses the Docker API. The Docker client can communicate with more than one daemon.
+
+Docker客户端作为和docker守护进程交流的主要方式。当你使用命令行例如docker run，客户端采用Docker API去发送指令给处理的守护进程。并且可以连接不止一个docker守护进程。
+
+### Docker registries 登记，注册，有点类似Github
+
+A Docker *registry* stores Docker images. 
+
+Docker registry 存储着docker的镜像
+
+Docker Hub is a public registry that anyone can use, and Docker is configured 配置 to look for 寻找 images on Docker Hub by default.
+
+Docker Hub 是一个公共的注册中心，所有人都可以使用。Docker默认是在Docker hub寻找镜像。
+
+ You can even run your own private registry. If you use Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
+
+你可以使用Docker 数据中心DDC包含（DTR Docker 可信注册）去搭建自己的私人镜像中心。
+
+When you use the `docker pull` or `docker run` commands, the required images are pulled from your configured registry. 
+
+当你使用pull 或者 run 命令的时候，请求的镜像从你配置的镜像中心中拉去。
+
+When you use the `docker push` command, your image is pushed to your configured registry.
+
+当你提交时，也是提交到你配置的镜像中心中。
+
+### Docker objects 对象
+
+When you use Docker, you are creating and using images, containers, networks, volumes, plugins, and other objects. This section 部分 is a brief 检验 overview 概述 of some of those objects.
+
+当你使用Docker，你创建镜像，容器，网络，数据卷，插件，和其他对象。这部分简要的介绍下这些对象
+
+
+
+#### IMAGES 镜像
+
+An *image* is a read-only template with instructions 指令，说明 for creating a Docker container. 
+
+镜像是一个只读的模版指令用于创建Docker容器。
+
+Often, an image is *based on* another image, with some additional customization. 
+
+通常一个镜像是以另外一个镜像为基础加上一点自定义。
+
+For example, you may build an image which is based on the `ubuntu` image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
+
+例如，你使用ubuntu系统镜像为基础，并在之上安装了web服务器和你的应用程序之后形成心新的镜像。这个过程就像你在开发你的应用程序一样。？**存疑**
+
+
+
+You might create your own images or you might only use those created by others and published in a registry. 
+
+你可以基于哪些公开提交到镜像中心的镜像创建你自己的镜像
+
+To build your own image, you create a *Dockerfile* with a simple syntax 语法 for defining the steps needed to create the image and run it. 
+
+创建自己的镜像，dockerfile可以让你使用简单的语法去定义每一步你需要的操作，然后通过它去构建你的镜像。
+
+Each instruction in a Dockerfile creates a layer in the image. 
+
+在Dockerfile的每个指令都会创建**一层镜像**
+
+When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt.
+
+当你修改了dockerfile后重新构建你的镜像时，只有**那些被修改的层会被改变**
+
+ This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
+
+这是为什么对比其他虚拟技术镜像可以如此轻量级，小巧，和快速。吹，就是一顿吹
