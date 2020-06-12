@@ -314,3 +314,89 @@ When you change the Dockerfile and rebuild the image, only those layers which ha
  This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
 
 这是为什么对比其他虚拟技术镜像可以如此轻量级，小巧，和快速。吹，就是一顿吹
+
+#### CONTAINERS 容器
+
+A container is a runnable instance of an image. 
+
+容器是镜像的一个可运行的实例。
+
+You can create, start, stop, move, or delete a container using the Docker API or CLI.
+
+你可以通过命令行工具或者Docker API 去创建，开启，关闭，**移动**，或者删除。
+
+You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
+
+你可以在这个容器基础上创建新的镜像。也可以让它连接更多的网络或者挂载存储设备给他。
+
+By default, a container is relatively 相当的 well isolated from other containers and its host machine. 
+
+但是默认情况下，容器相对于其他容器或者宿主机其实是相当独立的存在。
+
+You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.
+
+你可以控制容器的网络或者存储设备与运行在其他容器的子系统或者宿主机的隔离级别。
+
+A container is defined by its image as well as any configuration options you provide to it when you create or start it. 
+
+一个容器被两方面定义：1是他的镜像，2是创建和开启它时候的配置选项 例如 -p3306:3306 端口映射等
+
+When a container is removed, any changes to its state that are not stored in persistent storage 持续存储（就是说被本地存储起来不会丢失的意思） disappear.
+
+当一个容器被移除，所有有关它的改变都会消失，不会被实际存储
+
+##### Example `docker run` command 一个很简单的docker容器运行指令
+
+The following command runs an `ubuntu` container, attaches 附加 interactively 交互 to your local command-line session, and runs `/bin/bash`.
+
+这个指令使用了ubuntu镜像创建了一个容器并运行。
+
+```
+$ docker run -i -t ubuntu /bin/bash
+```
+
+When you run this command, the following happens (assuming you are using the default registry configuration):
+
+当你执行这个命令的时候会发生的事情（假设你使用的所有配置都是默认的）
+
+1. If you do not have the `ubuntu` image locally, Docker pulls it from your configured registry, as though you had run `docker pull ubuntu` manually. 
+2. Docker creates a new container, as though you had run a `docker container create` command manually.
+3. Docker allocates a read-write filesystem to the container, as its final layer. This allows a running container to create or modify files and directories in its local filesystem.
+4. Docker creates a network interface to connect the container to the default network, since you did not specify any networking options. This includes assigning an IP address to the container. By default, containers can connect to external networks using the host machine’s network connection.
+5. Docker starts the container and executes `/bin/bash`. Because the container is running interactively and attached to your terminal (due to the `-i` and `-t` flags), you can provide input using your keyboard while the output is logged to your terminal.
+6. When you type `exit` to terminate the `/bin/bash` command, the container stops but is not removed. You can start it again or remove it.
+
+
+
+1. 如果你本地没有`ubuntu`的镜像，Docker会去你配置的镜像中心拉去。就像你手动执行`docker pull ubuntu`一样
+2. Docker创建一个新的容器，就像你手动执行`docker container create`一样
+3. Docker分配一个文件读写系统给容器，作为最后一层。文件读写系统允许执行中的容器在它的本地目录上创建或者修改文件。
+4. 如果你没有指定特定连接网络的配置，Docker会创建一个网络接口去连接默认的网络。这个包括分配容器的IP地址。默认情况下容器**可以**通过宿主机的网络去连接外部网。
+5. Docker开启一个容器，并且运行 /bin/bash 。由于你执行了 -i 和 -t 你可以在终端上与容器交互。这样你的键盘就是输入设备，终端就是输出设备。
+6. 当你执行exit命令在终端上的时候。容器会停止但是不会被移除。你可以对它进行重新启动或者移除。
+
+#### SERVICES 集群
+
+Services allow you to scale containers across multiple Docker daemons, which all work together as a *swarm* with multiple *managers* and *workers*. 
+
+服务允许你把许多容器按比例的部署在多个Docker守护进程上。他们运行在一个集群中集群里有多个管理者和工作者。
+
+Each member of a swarm is a Docker daemon, and all the daemons communicate using the Docker API. 
+
+swarm中的每一个Docker守护进程使用Docker API互相联系。
+
+A service allows you to define the desired state, such as the number of replicas of the service that must be available at any given time. 
+
+集群可以定义你的一些要求状态，例如多少分片镜像必须存活在集群中。这样可以保证数据安全也可以提高吞吐量。
+
+By default, the service is load-balanced across all worker nodes.
+
+默认情况下，所有服务都会被做负载均衡
+
+To the consumer, the Docker service appears to be a single application. 
+
+但是这一切对于使用者来说就像操作一个单体应用一样简单。
+
+Docker Engine supports swarm mode in Docker 1.12 and higher.
+
+这个集群必须运行在Docker 1.12或者更高版本中。
