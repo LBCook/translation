@@ -400,3 +400,99 @@ To the consumer, the Docker service appears to be a single application.
 Docker Engine supports swarm mode in Docker 1.12 and higher.
 
 这个集群必须运行在Docker 1.12或者更高版本中。
+
+## The underlying technology[🔗](https://docs.docker.com/get-started/overview/#the-underlying-technology)
+
+关于Docker的底层技术
+
+Docker is written in [Go](https://golang.org/) and takes advantage of several features of the Linux kernel to deliver its functionality.
+
+Docker是使用Go语言和使用了Linux 内核的一些特性去实现功能。
+
+### Namespaces 名字空间
+
+Docker uses a technology called `namespaces` to provide the isolated workspace called the *container*. 
+
+Docker的容器是由一个叫`名字空间`的技术去提供一个隔离的工作空间
+
+When you run a container, Docker creates a set of *namespaces* for that container.
+
+当你开启容器，Docker给你创建了**一套**`名字空间`，注意是一套
+
+These namespaces provide a layer of isolation. 
+
+这些名字空间提供了一个隔离层。
+
+Each aspect of a container runs in a separate 单独的 namespace and its access is limited to that namespace.
+
+每一个容器运行在一个单独的名字空间中，并且它的权限只在这个名字空间中。
+
+Docker Engine uses namespaces such as the following on Linux:
+
+Docker引擎使用了Linux的下列名字空间
+
+- **The `pid` namespace:** Process isolation (PID: Process ID).
+- **The `net` namespace:** Managing network interfaces (NET: Networking).
+- **The `ipc` namespace:** Managing access to IPC resources (IPC: InterProcess Communication).
+- **The `mnt` namespace:** Managing filesystem mount 爬 points (MNT: Mount).
+- **The `uts` namespace:** Isolating kernel and version identifiers. (UTS: Unix Timesharing System).
+
+
+
+- `pid` ：用于线程隔离
+- `net`：管理网络接口 
+- `ipc`：管理对IPC资源的访问（IPC：线程之间的联系）
+- `mnt`：管理文件系统挂载点
+- `uts`：隔离的内核和版本鉴定（UTS：unix 时间分享系统）
+
+### Control groups 控制组
+
+Docker Engine on Linux also relies 信任 on another technology called *control groups* (`cgroups`). 
+
+Docker引擎在Linux中也依赖叫控制组的技术
+
+A cgroup limits an application to a specific set of resources. 
+
+控制组控制着应用程序的一系列资源
+
+Control groups allow Docker Engine to share available hardware resources to containers and optionally enforce limits and constraints. 
+
+控制组允许Docker引擎去分享可用的硬件资源给容器和控制
+
+For example, you can limit the memory available to a specific container.
+
+例如：你可以限定你的容器的可用内存
+
+PS：这块地方应该是说通过cgroup技术去分配宿主资源给容器们
+
+### Union file systems
+
+Union file systems, or UnionFS, are file systems that operate by creating layers, making them very lightweight and fast. 
+
+联盟文件系统，使用层的概念让它非常的轻量级和快速
+
+Docker Engine uses UnionFS to provide the building blocks for containers. 
+
+Docker引擎使用UnionFS去实现
+
+Docker Engine can use multiple UnionFS variants, including AUFS, btrfs, vfs, and DeviceMapper.
+
+Docker也可以使用多种联合文件系统，包括 AUFS, btrfs, vfs, and DeviceMapper.
+
+PS：这个应该就是容器一层一层的功能实现基础
+
+### Container format 容器格式
+
+Docker Engine combines the namespaces, control groups, and UnionFS into a wrapper called a container format. 
+
+Docker引擎结合了名字空间，控制组，联合文件系统，打包成一个叫容器格式的东西
+
+The default container format is `libcontainer`.
+
+默认的容器格式是 lib container
+
+ In the future, Docker may support other container formats by integrating with technologies such as BSD Jails or Solaris Zones.
+
+在未来，Docker也许会支持通过其他技术像BSD Jails 或者 SZ 实现的容器格式
+
+PS：容器格式就是一套实现Docker引擎的底层技术
