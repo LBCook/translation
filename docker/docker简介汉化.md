@@ -2,7 +2,9 @@
 
 https://docs.docker.com/get-started/overview/
 
-# Get started
+# Get started 开始
+
+
 
 ## Docker overview
 
@@ -12,7 +14,7 @@ Docker enables you to separate your applications from your infrastructure  so yo
 
 With Docker, you can manage your infrastructure in the same ways you manage your applications. 
 
-By taking advantage  of Docker’s methodologies  for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+By taking advantage of Docker’s methodologies  for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
 
 
 
@@ -24,7 +26,7 @@ Docker 可以让你的程序和基础环境分开，这样你可以快速的交�
 
 在Docker你可以管理你的基础环境就像你管理你的代码。
 
-根据Dokcer的移植，测试和快速部署代码，你可以明显的减少在写代码和程序完全部署之间的延迟。
+由于Dokcer的移植，测试和快速部署代码上的优势，你明显的缩短在写代码和部署程序执行环境所耗费的时间。
 
 
 
@@ -56,15 +58,17 @@ Docker provides tooling and a platform to manage the lifecycle of your container
 - The container becomes the unit for distributing and testing your application.
 - When you’re ready, deploy your application into your production environment, as a container or an orchestrated service. This works the same whether your production environment is a local data center, a cloud provider, or a hybrid of the two.
 
-Docker通过提供宽松和隔离的容器环境，去打包和执行应用程序。
+Docker 平台
 
-这个隔离性和安全性允许开发者同时在同一主机上执行很多的容器互不干扰。
+Docker通过提供轻量级且隔离的**容器**环境，去打包和执行应用程序。
+
+这个隔离性和安全性允许在一台主机上运行很多容器实例。
 
 之所以容器轻量级是因为不需要加载笨重的管理程序，而是直接运行在主机的内核上。
 
-这意味着在相同的物理机器上可以执行的容器数量要比虚拟机多得多。
+这意味着在相同配置的物理机器上可以执行的容器数量要比虚拟机多得多。
 
-你甚至可以把docker运行在主机的虚拟机中。
+你甚至可以把docker运行在主机的虚拟机中。PS：禁止套娃
 
 docker提供工具和平台去管理容器的生命周期
 
